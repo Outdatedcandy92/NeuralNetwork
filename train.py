@@ -9,25 +9,24 @@ data = np.array(data)
 m, n = data.shape
 np.random.shuffle(data) # shuffle before splitting into dev and training sets
 
-data_dev = data[0:1000].T
-Y_dev = data_dev[0]
-X_dev = data_dev[1:n]
-X_dev = X_dev / 255.
-
-data_train = data[1000:m].T
+data_train = data[0:m].T
 Y_train = data_train[0]
 X_train = data_train[1:n]
 X_train = X_train / 255.
 _,m_train = X_train.shape
 
 
+LEARNING_RATE = 0.20
+ITERATIONS = 1000
+
+
 
 
 
 def init_params():
-    W1 = np.random.rand(10, 784) - 0.5
-    b1 = np.random.rand(10, 1) - 0.5
-    W2 = np.random.rand(10, 10) - 0.5
+    W1 = np.random.rand(100, 784) - 0.5
+    b1 = np.random.rand(100, 1) - 0.5
+    W2 = np.random.rand(10, 100) - 0.5
     b2 = np.random.rand(10, 1) - 0.5
     return W1, b1, W2, b2
 
@@ -104,9 +103,9 @@ def gradient_descent(X, Y, alpha, iterations):
             print("Iteration: ", i)
             predictions = get_predictions(A2)
             accuracy = get_accuracy(predictions, Y)
-            print(accuracy)
+            print(f"Accuracy: {accuracy * 100:.2f}%")
             iterations_list.append(i)
-            accuracies_list.append(accuracy)
+            accuracies_list.append(round(accuracy * 100, 2))
             plot(iterations_list, accuracies_list, False)  # Plot all points at once
 
     plot(iterations_list, accuracies_list, True)  # Plot all points at once
@@ -115,7 +114,7 @@ def gradient_descent(X, Y, alpha, iterations):
     return W1, b1, W2, b2
 
 
-W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.8, 500)
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, LEARNING_RATE, ITERATIONS)
 
 model_parameters = {
     "W1": W1.tolist(),

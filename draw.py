@@ -55,18 +55,18 @@ while True:
         if event.type == pygame.MOUSEBUTTONUP:
             drawing = False
         if event.type == pygame.MOUSEMOTION and drawing:
-            pygame.draw.circle(screen, (255, 255, 255), event.pos, 10)
+            pygame.draw.circle(screen, (255, 255, 255), event.pos, 20)
 
     pygame.display.flip()
 
     if pygame.key.get_pressed()[pygame.K_s]:  # Press 'S' to save
         pygame.image.save(screen, "drawing.png")
-        label = input("Enter the label: ")
-        from test import test_prediction, W1, b1, W2, b2
-        image_to_csv("drawing.png", csv_path, label)
+
+        image_to_csv("drawing.png", csv_path, 1)
         time.sleep(1)
+        from test import test_prediction, W1, b1, W2, b2
         test_prediction(0, W1, b1, W2, b2)
-        exit()
+
         
 
        

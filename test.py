@@ -77,11 +77,11 @@ def test_prediction(index, W1, b1, W2, b2):
     prediction = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
     label = Y_train[index]
     print("Prediction: ", prediction)
-    print("Label: ", label)
     
     current_image = current_image.reshape((28, 28)) * 255
     plt.gray()
     plt.imshow(current_image, interpolation='nearest')
+    plt.title(f"Prediction {prediction}")
     plt.show()
 
 

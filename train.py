@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from plot import plot,save, plot_final
 import pandas as pd
 import json
 
@@ -79,10 +79,23 @@ def get_predictions(A2):
     return np.argmax(A2, 0)
 
 def get_accuracy(predictions, Y):
+
     return np.sum(predictions == Y) / Y.size
+
+def get_acc(predictions, Y):
+    count = 0
+    for pred, actual in zip(predictions, Y):
+        if pred == actual:
+            count += 1
+    accuracy = count / len(Y)
+    return accuracy
+
+import matplotlib.pyplot as plt  # Ensure matplotlib is imported
 
 def gradient_descent(X, Y, alpha, iterations):
     W1, b1, W2, b2 = init_params()
+    iterations_list = []  # List to store iteration numbers
+    accuracies_list = []  # List to store accuracies
     for i in range(iterations):
         Z1, A1, Z2, A2 = forward_prop(W1, b1, W2, b2, X)
         dW1, db1, dW2, db2 = backward_prop(Z1, A1, Z2, A2, W1, W2, X, Y)
@@ -90,29 +103,19 @@ def gradient_descent(X, Y, alpha, iterations):
         if i % 10 == 0:
             print("Iteration: ", i)
             predictions = get_predictions(A2)
-            print(get_accuracy(predictions, Y))
+            accuracy = get_accuracy(predictions, Y)
+            print(accuracy)
+            iterations_list.append(i)
+            accuracies_list.append(accuracy)
+            plot(iterations_list, accuracies_list, False)  # Plot all points at once
+
+    plot(iterations_list, accuracies_list, True)  # Plot all points at once
+    save()
+
     return W1, b1, W2, b2
 
-def make_predictions(X, W1, b1, W2, b2):
-    _, _, _, A2 = forward_prop(W1, b1, W2, b2, X)
-    predictions = get_predictions(A2)
-    return predictions
 
-def test_prediction(index, W1, b1, W2, b2):
-    current_image = X_train[:, index, None]
-    prediction = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
-    label = Y_train[index]
-    print("Prediction: ", prediction)
-    print("Label: ", label)
-    
-    current_image = current_image.reshape((28, 28)) * 255
-    plt.gray()
-    plt.imshow(current_image, interpolation='nearest')
-    plt.show()
-
-
-
-W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.8, 500)
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.8, 100)
 
 model_parameters = {
     "W1": W1.tolist(),

@@ -1,7 +1,6 @@
 import json
 import numpy as np
 import matplotlib.pyplot as plt
-from train import X_train, Y_train
 import pandas as pd
 
 with open('model_parameters.json', 'r') as json_file:
@@ -12,20 +11,22 @@ b1 = np.array(loaded_parameters["b1"])
 W2 = np.array(loaded_parameters["W2"])
 b2 = np.array(loaded_parameters["b2"])
 
-data = pd.read_csv('./archive/mnist_train.csv') 
+data = pd.read_csv('output.csv') 
 
 data = np.array(data)
 m, n = data.shape
-np.random.shuffle(data) 
-data_dev = data[0:1000].T
+np.random.shuffle(data) # shuffle before splitting into dev and training sets
 
-data_train = data[1000:m].T
+data_dev = data[0:1000].T
+Y_dev = data_dev[0]
+X_dev = data_dev[1:n]
+X_dev = X_dev / 255.
+
+data_train = data.T
 Y_train = data_train[0]
 X_train = data_train[1:n]
 X_train = X_train / 255.
-
-
-
+_,m_train = X_train.shape
 
 def init_params():
     W1 = np.random.rand(10, 784) - 0.5
@@ -84,5 +85,4 @@ def test_prediction(index, W1, b1, W2, b2):
     plt.show()
 
 
-
-test_prediction(2, W1, b1, W2, b2)
+test_prediction(0, W1, b1, W2, b2)

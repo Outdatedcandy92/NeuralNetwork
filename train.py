@@ -115,7 +115,7 @@ def gradient_descent(X, Y, alpha, iterations):
     return W1, b1, W2, b2
 
 
-W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.8, 100)
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.3, 1000)
 
 model_parameters = {
     "W1": W1.tolist(),
@@ -126,5 +126,5 @@ model_parameters = {
 
 with open('model_parameters.json', 'w') as json_file:
     json.dump(model_parameters, json_file)
-
+    print("Model parameters saved to model_parameters.json")
 

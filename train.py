@@ -115,7 +115,7 @@ def gradient_descent(X, Y, alpha, iterations):
     return W1, b1, W2, b2
 
 
-W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.3, 1000)
+W1, b1, W2, b2 = gradient_descent(X_train, Y_train, 0.1, 1000)
 
 model_parameters = {
     "W1": W1.tolist(),

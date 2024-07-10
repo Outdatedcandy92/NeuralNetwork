@@ -86,3 +86,4 @@ def test_prediction(index, W1, b1, W2, b2):
 
 
 test_prediction(0, W1, b1, W2, b2)
+

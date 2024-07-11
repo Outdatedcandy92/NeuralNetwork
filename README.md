@@ -57,3 +57,31 @@ Figure(800x600)
  
 ![rec](https://github.com/Outdatedcandy92/NeuralNetwork/assets/138517406/20588d9f-d6b6-4eea-a4d0-35a8bc2a007b)
 
+
+## How does it works?
+
+#### 1. We have 28x28 pixel images
+
+![rec](./temp/px.png)
+
+#### 2. Images are converted into a .csv
+ For Simplicty we are just looking at an example with 1 number (with random values).
+
+| Label   | 1x1 | 1x2 | 1x3 | ... | 28x28 |
+| ------- | --- | --- | --- | --- | --- |
+| 9       | 0   | 0   | 153   | ... | 343   |
+
+ 
+- Here each pixel is given a value between `0` and `255` based on its brightness.
+- `0` being black, `255` being complelty white
+
+#### 3. We convert the csv into a matrix
+
+[![\\ X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  =  \begin{bmatrix} | ... | \\X^{[1]} ... X^{[m]} \\| ... | \\\end{bmatrix}   \\ ](https://latex.codecogs.com/svg.latex?%5C%5C%20X%20%3D%20%5Cbegin%7Bbmatrix%7D--%20X%5E%7B%5B1%5D%7D--%20%5C%5C.%20%5C%5C%20.%5C%5C.%5C%5C--X%5E%7B%5Bm%5D%7D--%5Cend%7Bbmatrix%7D%5E%7BT%7D%20%20%3D%20%20%5Cbegin%7Bbmatrix%7D%20%7C%20...%20%7C%20%5C%5CX%5E%7B%5B1%5D%7D%20..%20X%5E%7B%5Bm%5D%7D%20%5C%5C%7C%20...%20%7C%20%5C%5C%5Cend%7Bbmatrix%7D%20%20%20%5C%5C%20)](#_)
+- Here in the first matrix, each row has 784 values, accounting for the value of each pixel
+- We then transpose it and now each column has 784 values
+- `m` = the number of examples our training data has
+
+#### -> What we are aiming for
+
+![img](./temp/neural.png)

@@ -78,7 +78,7 @@ Figure(800x600)
 #### 3. We convert the csv into a matrix
 
 $X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  = 
- \begin{bmatrix} | ... | \\X^{[1]} .. X^{[m]} \\| ... | \\\end{bmatrix}$  
+ \begin{bmatrix} | \  .\ . \ . \ | \\X^{[1]} .. X^{[m]} \\|\  .\ . \ .\  | \\\end{bmatrix}$  
 
 - Here in the first matrix, each row has 784 values, accounting for the value of each pixel
 - We then transpose it and now each column has 784 values
@@ -118,6 +118,32 @@ $A^{[2]}=softmax(Z^{[2]})$ `Output Layer`
 - Probability values are gonna be between `0` and `1`
 
 #### 8. Back Propogation `Fix Weights and Biases`
-$\large dZ^{[2]} = A^{[2]}- Y  $
-&nbsp;  
-$\large dw^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}$
+&nbsp; 
+$\Large\displaystyle 2^{nd} Layer\Large \begin{cases}
+dZ^{[2]} = A^{[2]}- Y  \\
+dW^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}\\
+db^{[2]}=\frac{1}{m}\sum_{}^{}dz^{[2]} \\
+\end{cases}$
+&nbsp;
+&nbsp;
+&nbsp;
+$\Large\displaystyle 1^{st} Layer\Large \begin{cases}
+dZ^{[1]}=W^{[1]^{T}}dZ^{[2]} \times g'(Z^{[1]})\\
+dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}\\
+db^{[1]}=\frac{1}{m}\sum_{}^{}dZ^{[1]}
+\end{cases}$
+
+#### 9. Updating Weights and Biases
+
+$\Large \alpha \normalsize = Learning \ Rate$ `Hyperparameter`
+
+$$W^{[1]}= W^{[1]}- \Large \alpha \ \normalsize  dW^{[1]}\\
+b^{[1]}= b^{[1]}- \Large \alpha \ \normalsize  db^{[1]}\\
+W^{[2]}= W^{[2]}- \Large \alpha \ \normalsize  dW^{[2]}\\
+b^{[2]}= b^{[2]}- \Large \alpha \ \normalsize  db^{[2]}\\$$
+
+
+#### 10. Repeat the process with new weights and biases
+
+ <img src="/temp/flow.png" style="display: block;  margin-left: auto;
+  margin-right: auto;">

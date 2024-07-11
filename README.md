@@ -77,7 +77,9 @@ Figure(800x600)
 
 #### 3. We convert the csv into a matrix
 
-[![\\ X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  =  \begin{bmatrix} | ... | \\X^{[1]} ... X^{[m]} \\| ... | \\\end{bmatrix}   \\ ](https://latex.codecogs.com/svg.latex?%5C%5C%20X%20%3D%20%5Cbegin%7Bbmatrix%7D--%20X%5E%7B%5B1%5D%7D--%20%5C%5C.%20%5C%5C%20.%5C%5C.%5C%5C--X%5E%7B%5Bm%5D%7D--%5Cend%7Bbmatrix%7D%5E%7BT%7D%20%20%3D%20%20%5Cbegin%7Bbmatrix%7D%20%7C%20...%20%7C%20%5C%5CX%5E%7B%5B1%5D%7D%20..%20X%5E%7B%5Bm%5D%7D%20%5C%5C%7C%20...%20%7C%20%5C%5C%5Cend%7Bbmatrix%7D%20%20%20%5C%5C%20)](#_)
+$X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  = 
+ \begin{bmatrix} | ... | \\X^{[1]} .. X^{[m]} \\| ... | \\\end{bmatrix}$  
+
 - Here in the first matrix, each row has 784 values, accounting for the value of each pixel
 - We then transpose it and now each column has 784 values
 - `m` = the number of examples our training data has
@@ -85,3 +87,33 @@ Figure(800x600)
 #### -> What we are aiming for
 
 ![img](./temp/neural.png)
+
+
+#### 4. Forward Propogation
+
+##### $A^{[0]}= X $    `Input Layer` $(784*m)$  
+
+
+$Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
+- $Z^{[1]}$ is our hidden layer ,$w^{[1]}$ is weight, $b^{[1]}$ is bias
+
+#### 5. Activation Function
+- We use Rectified Linear Unit here
+$A^{[1]}= ReLU(Z^{[1]})$  
+$ReLU(x) = \max(0,x)$
+
+#### 6. Layer [1] to [2]
+
+  $ \large Z^{[2]}= w^{[2]}A^{[1]} + b^{[2]}$
+
+#### 7. Activation Function for layer 2
+$A^{[2]}=softmax(Z^{[2]})$ `Output Layer`
+
+```math
+\text{Output Layer} \begin{bmatrix}1.3 \\. \\\ . \\. \\7.2 \\\end{bmatrix}   \huge  \to \small \text{Softmax Function} \huge \frac{e^{z_{i}}}{\sum_{j=1}^{K}e^{z_{j}}} \to \normalsize  \begin{bmatrix}0.02 \\. \\. \\. \\0.98 \\ \end{bmatrix}\text{Probabilites}
+```
+- Probability values are gonna be between `0` and `1`
+
+#### 8. Back Propogation
+$dZ^{[2]} = A^{[2]}- Y  $
+$dw^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}$

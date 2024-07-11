@@ -93,14 +93,14 @@ X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  =
 
 
 #### 4. Forward Propogation
-- $A^{[0]}$is our input layer 
+- $A^{[0]}$ is our input layer 
 
-$ \large A^{[0]}= X$ 
+$\large A^{[0]}= X$ 
 
 ---
 - $Z^{[1]}$ is our hidden layer , $w^{[1]}$ is weight, $b^{[1]}$ is bias
  
-$ \large Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
+$\large Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
 
 
 #### 5. Activation Function

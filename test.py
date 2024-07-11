@@ -70,7 +70,11 @@ def get_accuracy(predictions, Y):
 def make_predictions(X, W1, b1, W2, b2):
     _, _, _, A2 = forward_prop(W1, b1, W2, b2, X)
     predictions = get_predictions(A2)
-    return predictions, A2
+    A2_normalized = (A2 - np.min(A2)) / (np.max(A2) - np.min(A2))
+    A2_normalized = np.round(A2_normalized, 2)  # Round to 2 decimal places
+
+    #print(A2_normalized_str)
+    return predictions, A2_normalized
 
 
 

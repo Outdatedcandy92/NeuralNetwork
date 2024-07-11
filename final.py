@@ -82,6 +82,28 @@ def image_to_csv(image_path, csv_path, label):
         writer.writerow([label] + pixel_values)  # Write the pixel values with the label
 
 
+def display_text(window, text, position, font, color=(0, 0, 0)):
+    lines = text.split('\n')
+    for i, line in enumerate(lines):
+        text_surface = font.render(line, True, color)
+        window.blit(text_surface, (position[0], position[1] + i * 20))
+
+def clear_neuron(neuron_activations):
+    neuron_activations_lines = ["Neuron Activations:"] + [f"Neuron {i}: {activation}" for i, activation in enumerate(neuron_activations)]
+    max_width = 0
+    line_height = font.get_linesize()  # Height of one line of text
+    total_height = line_height * len(neuron_activations_lines)  # Total height of all lines
+
+    # Calculate the maximum width of the neuron activation lines
+    for line in neuron_activations_lines:
+        line_surface = font.render(line, True, text_color)
+        line_width, _ = line_surface.get_size()
+        if line_width > max_width:
+            max_width = line_width
+
+    # Clear the area where neuron activations text was displayed
+    window.fill((255, 255, 255), (text_position[0], text_position[1], max_width, total_height))
+
 # Initialize the drawing variable
 drawing = False
 
@@ -92,6 +114,7 @@ running = True
 border_thickness = 1
 inner_rect = (box_x + border_thickness, box_y + border_thickness, box_width - 2*border_thickness, box_height - 2*border_thickness)
 drawing_area = window.subsurface(inner_rect)
+text_position = (600, 150)
 
 pygame.display.update()
 # Inside the game loop, before updating the display
@@ -118,9 +141,15 @@ while running:
                 print("Drawing saved as 'drawing.png'")
                 image_to_csv("./resources/drawing.png", csv_path, 1)
                 importlib.reload(test)
-                result = test.test_prediction(0, W1, b1, W2, b2)
+                result, neuron_activations = test.test_prediction(0, W1, b1, W2, b2)
                 text_surface = font.render(f"Prediction: {str(result)}", True, text_color)
                 text_width, text_height = text_surface.get_size()
+
+                clear_neuron(neuron_activations)
+                neuron_activations_text = "Neuron Activations:\n" + "\n".join(f"Neuron {i}: {str(activation).strip('[]')}" for i, activation in enumerate(neuron_activations))
+                display_text(window, neuron_activations_text, text_position, font)
+
+
                 window.fill((255,255,255), (text_x, text_y, text_width, text_height))
 
                 window.blit(text_surface, (text_x, text_y))  

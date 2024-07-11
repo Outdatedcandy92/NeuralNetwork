@@ -70,11 +70,13 @@ def get_accuracy(predictions, Y):
 def make_predictions(X, W1, b1, W2, b2):
     _, _, _, A2 = forward_prop(W1, b1, W2, b2, X)
     predictions = get_predictions(A2)
-    return predictions
+    return predictions, A2
+
+
 
 def test_prediction(index, W1, b1, W2, b2):
     current_image = X_train[:, index, None]
-    prediction = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
+    prediction, Neuron_act = make_predictions(X_train[:, index, None], W1, b1, W2, b2)
     label = Y_train[index]
     print("Prediction: ", prediction)
     
@@ -82,9 +84,8 @@ def test_prediction(index, W1, b1, W2, b2):
     plt.gray()
     plt.imshow(current_image, interpolation='nearest')
     plt.title(f"Prediction {prediction}")
-    plt.savefig("./resources/test_image.png")
-    return prediction
-
+    plt.savefig(f"./resources/test_image_{index}.png")
+    return prediction, Neuron_act  
 
 #test_prediction(0, W1, b1, W2, b2)
 

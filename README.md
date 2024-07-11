@@ -55,7 +55,7 @@ Figure(800x600)
 2. Inside the pygame window draw a number and then press `S` to get the prediction.   
 
  
-![rec](https://github.com/Outdatedcandy92/NeuralNetwork/assets/138517406/20588d9f-d6b6-4eea-a4d0-35a8bc2a007b)
+![rec](./temp/demo.gif)
 
 --- 
 

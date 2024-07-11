@@ -17,8 +17,8 @@ _,m_train = X_train.shape
 
 # Hyperparameters
 
-LEARNING_RATE = 0.20
-ITERATIONS = 3000
+LEARNING_RATE = 0.10
+ITERATIONS = 500
 
 
 

@@ -62,7 +62,7 @@ while True:
     if pygame.key.get_pressed()[pygame.K_s]:  # Press 'S' to save
         pygame.image.save(screen, "drawing.png")
 
-        image_to_csv("drawing.png", csv_path, 1)
+        image_to_csv("./resources/drawing.png", csv_path, 1)
         time.sleep(1)
         from test import test_prediction, W1, b1, W2, b2
         test_prediction(0, W1, b1, W2, b2)

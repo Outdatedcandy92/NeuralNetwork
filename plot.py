@@ -8,22 +8,12 @@ def plot(iterations, accuracy, blck):
     display.clear_output(wait=True)
     display.display(plt.gcf())
     plt.clf()
-    plt.title('Data')
-    plt.xlabel('Number of Games')
-    plt.ylabel('Score')
+    plt.title('Training Accuracy')
+    plt.xlabel('Iterations')
+    plt.ylabel('Accuracy')
     plt.plot(iterations,accuracy)
     plt.show(block=blck)
     plt.pause(0.001)
 
-def plot_final(iterations, accuracy):
-    display.clear_output(wait=True)
-    display.display(plt.gcf())
-    plt.clf()
-    plt.title('Data')
-    plt.xlabel('Number of Games')
-    plt.ylabel('Score')
-    plt.plot(iterations,accuracy)
-    plt.show(block=True)
-
-def save():
-    plt.savefig('archive/plot.png')
+def plot_save():
+    plt.savefig('resources/plot.png')

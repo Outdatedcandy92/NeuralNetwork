@@ -1,9 +1,9 @@
 import numpy as np
-from plot import plot,save, plot_final
+from plot import plot,plot_save
 import pandas as pd
 import json
 
-data = pd.read_csv('./archive/mnist_train.csv')
+data = pd.read_csv('./resources/mnist_train.csv')
 
 data = np.array(data)
 m, n = data.shape
@@ -15,6 +15,7 @@ X_train = data_train[1:n]
 X_train = X_train / 255.
 _,m_train = X_train.shape
 
+# Hyperparameters
 
 LEARNING_RATE = 0.20
 ITERATIONS = 1000
@@ -106,10 +107,9 @@ def gradient_descent(X, Y, alpha, iterations):
             print(f"Accuracy: {accuracy * 100:.2f}%")
             iterations_list.append(i)
             accuracies_list.append(round(accuracy * 100, 2))
-            plot(iterations_list, accuracies_list, False)  # Plot all points at once
 
     plot(iterations_list, accuracies_list, True)  # Plot all points at once
-    save()
+    plot_save()
 
     return W1, b1, W2, b2
 
@@ -123,7 +123,7 @@ model_parameters = {
     "b2": b2.tolist()
 }
 
-with open('model_parameters.json', 'w') as json_file:
+with open('./resources/model_parameters.json', 'w') as json_file:
     json.dump(model_parameters, json_file)
     print("Model parameters saved to model_parameters.json")
 

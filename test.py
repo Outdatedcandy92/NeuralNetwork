@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-with open('model_parameters.json', 'r') as json_file:
+with open('./resources/model_parameters.json', 'r') as json_file:
     loaded_parameters = json.load(json_file)
 
 W1 = np.array(loaded_parameters["W1"])
@@ -11,7 +11,7 @@ b1 = np.array(loaded_parameters["b1"])
 W2 = np.array(loaded_parameters["W2"])
 b2 = np.array(loaded_parameters["b2"])
 
-data = pd.read_csv('output.csv') 
+data = pd.read_csv('./resources/output.csv') 
 
 data = np.array(data)
 m, n = data.shape
@@ -82,7 +82,8 @@ def test_prediction(index, W1, b1, W2, b2):
     plt.gray()
     plt.imshow(current_image, interpolation='nearest')
     plt.title(f"Prediction {prediction}")
-    plt.show()
+    plt.savefig("./resources/test_image.png")
+    return prediction
 
 
 #test_prediction(0, W1, b1, W2, b2)

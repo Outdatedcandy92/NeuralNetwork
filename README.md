@@ -91,29 +91,33 @@ $X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  =
 
 #### 4. Forward Propogation
 
-##### $A^{[0]}= X $    `Input Layer` $(784*m)$  
-
-
-$Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
+$\large A^{[0]}= X $    `Input Layer` $(784*m)$  
+&nbsp; 
+$\large Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
 - $Z^{[1]}$ is our hidden layer ,$w^{[1]}$ is weight, $b^{[1]}$ is bias
 
 #### 5. Activation Function
 - We use Rectified Linear Unit here
-$A^{[1]}= ReLU(Z^{[1]})$  
+&nbsp; 
+$A^{[1]}= ReLU(Z^{[1]})$   
+&nbsp; 
 $ReLU(x) = \max(0,x)$
-
+&nbsp; 
 #### 6. Layer [1] to [2]
-
+&nbsp; 
   $ \large Z^{[2]}= w^{[2]}A^{[1]} + b^{[2]}$
-
+&nbsp; 
 #### 7. Activation Function for layer 2
+&nbsp; 
 $A^{[2]}=softmax(Z^{[2]})$ `Output Layer`
-
+&nbsp; 
 ```math
 \text{Output Layer} \begin{bmatrix}1.3 \\. \\\ . \\. \\7.2 \\\end{bmatrix}   \huge  \to \small \text{Softmax Function} \huge \frac{e^{z_{i}}}{\sum_{j=1}^{K}e^{z_{j}}} \to \normalsize  \begin{bmatrix}0.02 \\. \\. \\. \\0.98 \\ \end{bmatrix}\text{Probabilites}
 ```
+&nbsp; 
 - Probability values are gonna be between `0` and `1`
 
-#### 8. Back Propogation
-$dZ^{[2]} = A^{[2]}- Y  $
-$dw^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}$
+#### 8. Back Propogation `Fix Weights and Biases`
+$\large dZ^{[2]} = A^{[2]}- Y  $
+&nbsp;  
+$\large dw^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}$

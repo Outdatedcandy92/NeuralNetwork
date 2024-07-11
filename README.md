@@ -148,7 +148,7 @@ db^{[2]}=\frac{1}{m}\sum_{}^{}dz^{[2]} \\
 #### 9. Updating Weights and Biases
 
 ```math
-\Large \alpha \normalsize = Learning \ Rate \ \ \ (Hyperparameter)
+\Large \alpha \normalsize = Learning \ Rate \ \  (Hyperparameter)
 ```
  
 

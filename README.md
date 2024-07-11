@@ -57,6 +57,7 @@ Figure(800x600)
  
 ![rec](https://github.com/Outdatedcandy92/NeuralNetwork/assets/138517406/20588d9f-d6b6-4eea-a4d0-35a8bc2a007b)
 
+--- 
 
 ## How does it works?
 
@@ -77,8 +78,10 @@ Figure(800x600)
 
 #### 3. We convert the csv into a matrix
 
-$X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  = 
- \begin{bmatrix} | \  .\ . \ . \ | \\X^{[1]} .. X^{[m]} \\|\  .\ . \ .\  | \\\end{bmatrix}$  
+```math
+X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  = 
+ \begin{bmatrix} | \  .\ . \ . \ | \\X^{[1]} .. X^{[m]} \\|\  .\ . \ .\  | \\\end{bmatrix}
+ ``` 
 
 - Here in the first matrix, each row has 784 values, accounting for the value of each pixel
 - We then transpose it and now each column has 784 values
@@ -90,11 +93,15 @@ $X = \begin{bmatrix}-- X^{[1]}-- \\. \\ .\\.\\--X^{[m]}--\end{bmatrix}^{T}  =
 
 
 #### 4. Forward Propogation
+- $A^{[0]}$is our input layer 
 
-$\large A^{[0]}= X $    `Input Layer` $(784*m)$  
-&nbsp; 
-$\large Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
+$ \large A^{[0]}= X $ 
+
+---
 - $Z^{[1]}$ is our hidden layer ,$w^{[1]}$ is weight, $b^{[1]}$ is bias
+ 
+$ \large Z^{[1]}= w^{[1]}A^{[0]} + b^{[1]}$
+
 
 #### 5. Activation Function
 - We use Rectified Linear Unit here
@@ -105,7 +112,9 @@ $ReLU(x) = \max(0,x)$
 &nbsp; 
 #### 6. Layer [1] to [2]
 &nbsp; 
-  $ \large Z^{[2]}= w^{[2]}A^{[1]} + b^{[2]}$
+```math  
+   \large Z^{[2]}= w^{[2]}A^{[1]} + b^{[2]}
+```   
 &nbsp; 
 #### 7. Activation Function for layer 2
 &nbsp; 
@@ -119,23 +128,29 @@ $A^{[2]}=softmax(Z^{[2]})$ `Output Layer`
 
 #### 8. Back Propogation `Fix Weights and Biases`
 &nbsp; 
-$\Large\displaystyle 2^{nd} Layer\Large \begin{cases}
+```math 
+\Large \displaystyle 2^{nd} Layer\Large \begin{cases}
 dZ^{[2]} = A^{[2]}- Y  \\
 dW^{[2]} =\frac{1}{m} dZ^{[2]}A^{[1]^{T}}\\
 db^{[2]}=\frac{1}{m}\sum_{}^{}dz^{[2]} \\
-\end{cases}$
+\end{cases}
+```
 &nbsp;
 &nbsp;
 &nbsp;
-$\Large\displaystyle 1^{st} Layer\Large \begin{cases}
-dZ^{[1]}=W^{[1]^{T}}dZ^{[2]} \times g'(Z^{[1]})\\
-dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}\\
-db^{[1]}=\frac{1}{m}\sum_{}^{}dZ^{[1]}
-\end{cases}$
+
+```math 
+\Large \displaystyle 1^{st} Layer\Large \begin{cases} dZ^{[1]}=W^{[1]^{T}}dZ^{[2]} \times g'(Z^{[1]})\\ dW^{[1]}=\frac{1}{m}dZ^{[1]}X^{T}\\ db^{[1]}=\frac{1}{m}\sum_{}^{}dZ^{[1]}
+\end{cases}
+```
+&nbsp;
 
 #### 9. Updating Weights and Biases
 
-$\Large \alpha \normalsize = Learning \ Rate$ `Hyperparameter`
+```math
+\Large \alpha \normalsize = Learning \ Rate \ \ \ (Hyperparameter)
+```
+ 
 
 $$W^{[1]}= W^{[1]}- \Large \alpha \ \normalsize  dW^{[1]}\\
 b^{[1]}= b^{[1]}- \Large \alpha \ \normalsize  db^{[1]}\\
@@ -147,3 +162,5 @@ b^{[2]}= b^{[2]}- \Large \alpha \ \normalsize  db^{[2]}\\$$
 
  <img src="/temp/flow.png" style="display: block;  margin-left: auto;
   margin-right: auto;">
+
+--- 

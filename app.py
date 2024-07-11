@@ -11,9 +11,10 @@ import test
        
 # Initialize Pygame
 pygame.init()
+pygame.display.set_caption('Digit Recognizer')
 
 # Set the window size
-window_width = 1000
+window_width = 1300
 window_height = 600
 window = pygame.display.set_mode((window_width, window_height))
 
@@ -37,7 +38,7 @@ text_color = (0, 0, 0)  # White
 
 
 # Position for the text
-text_x = 500  # Adjust as needed
+text_x = 1000  # Adjust as needed
 text_y = 100  # Adjust as needed
 
 
@@ -114,15 +115,15 @@ running = True
 border_thickness = 1
 inner_rect = (box_x + border_thickness, box_y + border_thickness, box_width - 2*border_thickness, box_height - 2*border_thickness)
 drawing_area = window.subsurface(inner_rect)
-text_position = (600, 150)
+text_position = (1000, 150)
 
 pygame.display.update()
 # Inside the game loop, before updating the display
 pygame.draw.rect(window, (0, 0, 0), (box_x, box_y, box_width, box_height))
 while running:
     submit_button_rect = pygame.Rect(submit_button_x, submit_button_y, submit_button_width, submit_button_height)
-    pygame.draw.rect(window, (0, 255, 255), submit_button_rect)  # Drawing a green submit button
-    submit_text_surface = font.render('Submit', True, (0, 0, 0))  # White text
+    pygame.draw.rect(window, (252, 132, 119), submit_button_rect)  
+    submit_text_surface = font.render('Submit', True, (0, 0, 0))  
     window.blit(submit_text_surface, (submit_button_x + 10, submit_button_y + 5)) 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -141,10 +142,11 @@ while running:
                 print("Drawing saved as 'drawing.png'")
                 image_to_csv("./resources/drawing.png", csv_path, 1)
                 importlib.reload(test)
-                result, neuron_activations = test.test_prediction(0, W1, b1, W2, b2)
+                result, neuron_activations, buff = test.test_prediction(0, W1, b1, W2, b2)
                 text_surface = font.render(f"Prediction: {str(result)}", True, text_color)
                 text_width, text_height = text_surface.get_size()
-
+                plot_image = pygame.image.load(buff)
+                window.blit(plot_image, (550, 90)) 
                 clear_neuron(neuron_activations)
                 neuron_activations_text = "Neuron Activations:\n" + "\n".join(f"Neuron {i}: {str(activation).strip('[]')}" for i, activation in enumerate(neuron_activations))
                 display_text(window, neuron_activations_text, text_position, font)

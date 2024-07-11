@@ -2,6 +2,7 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import io
 
 with open('./resources/model_parameters.json', 'r') as json_file:
     loaded_parameters = json.load(json_file)
@@ -88,8 +89,10 @@ def test_prediction(index, W1, b1, W2, b2):
     plt.gray()
     plt.imshow(current_image, interpolation='nearest')
     plt.title(f"Prediction {prediction}")
-    plt.savefig(f"./resources/test_image_{index}.png")
-    return prediction, Neuron_act  
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', bbox_inches='tight', pad_inches=0)
+    buf.seek(0)
+    return prediction, Neuron_act , buf 
 
 #test_prediction(0, W1, b1, W2, b2)
 

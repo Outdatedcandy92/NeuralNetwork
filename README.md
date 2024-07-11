@@ -47,10 +47,10 @@ Figure(800x600)
 
 ### Step 2: Testing the model
 
-1. Run draw.py
+1. Run app.py
 
 ```bash
-> python draw.py
+> python app.py
 ```
 2. Inside the pygame window draw a number and then press `S` to get the prediction.   
 
